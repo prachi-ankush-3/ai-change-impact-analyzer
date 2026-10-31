@@ -1,0 +1,19 @@
+# Runs the analyzer on every pull request and writes the report to the job summary.
+# Set repo variable ANALYZER_URL (e.g. https://impact.example.com) and optionally secret ANALYZER_TOKEN.
+name: Change impact analysis
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Analyze pull request
+        env:
+          URL: ${{ vars.ANALYZER_URL }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          id=$(curl -sf -X POST "$URL/api/analyze" -H 'Content-Type: application/json' \
+            -d "{\"repo\":\"$REPO\",\"pr\":$PR}" | python3 -c 'import sys,json;print(json.load(sys.stdin)["id"])')
+          curl -sf "$URL/api/history/$id/report?format=md" >> "$GITHUB_STEP_SUMMARY"

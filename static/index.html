@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f0e6">
+<title>Change Atlas — AI Impact Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#f5f0e6;--paper2:#ebe4d7;--surface:#fffdf8;--surface2:#f9f5ec;
+ --ink:#29221f;--muted:#81766d;--line:#ded5c8;--line2:#cfc3b3;
+ --plum:#49263f;--plum2:#61334f;--acid:#d7f36a;--acid2:#c5e54e;
+ --orange:#f0784b;--orange2:#e45e39;--rose:#e8a1a0;--green:#66845b;
+ --high:#c84d3c;--med:#b77a25;--low:#628454;
+ --shadow:0 18px 50px rgba(57,39,31,.07);
+ font-family:"DM Sans",system-ui,sans-serif;color:var(--ink)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--paper);line-height:1.55;display:flex}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;z-index:-1;background-image:radial-gradient(#b6a998 .65px,transparent .65px);background-size:7px 7px}
+aside{width:252px;flex:0 0 252px;background:var(--plum);color:#f8f1e8;padding:27px 19px 22px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh;z-index:5;overflow:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:5px 7px 28px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:18px}
+.brand-mark{width:42px;height:42px;border-radius:14px;background:var(--acid);color:var(--plum);display:grid;place-items:center;font-family:"Space Grotesk";font-size:22px;font-weight:700;transform:rotate(-5deg);box-shadow:5px 5px 0 rgba(0,0,0,.12)}
+.brand-name{font-family:"Space Grotesk";font-size:19px;font-weight:700;letter-spacing:-.7px;line-height:1.1;color:#fff}
+.brand-name small{display:block;font:500 9px "DM Mono";letter-spacing:1.7px;color:#d6bfcf;margin-top:5px;text-transform:uppercase}
+.nav-label{font:500 10px "DM Mono";letter-spacing:1.8px;color:#bda6b7;padding:14px 11px 7px;text-transform:uppercase}
+aside button{background:transparent;border:0;color:#d9cbd5;text-align:left;padding:12px 13px;border-radius:12px;font:600 13px "DM Sans";cursor:pointer;display:flex;align-items:center;gap:12px;transition:.2s}
+aside button .nav-icon{width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.09);font-size:14px}
+aside button.on,aside button:hover{background:var(--acid);color:var(--plum);box-shadow:0 8px 18px rgba(0,0,0,.12);transform:translateX(2px)}
+aside button.on .nav-icon,aside button:hover .nav-icon{background:rgba(73,38,63,.12)}
+.side-bottom{margin-top:auto}
+.side-note{border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px;background:rgba(255,255,255,.055);font-size:11px;color:#d5c5cf}
+.side-note strong{display:block;color:var(--acid);font:500 10px "DM Mono";letter-spacing:1px;margin-bottom:5px}
+.mode{margin-top:12px;padding:12px 5px 0;color:#c9b7c3;font:11px/1.8 "DM Mono";border-top:1px solid rgba(255,255,255,.14)}
+.mode b{color:#fff;font-weight:500}
+main{flex:1;min-width:0;padding:38px clamp(22px,4.2vw,66px) 80px;max-width:1600px;margin:0 auto}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}
+.eyebrow{font:500 10px "DM Mono";letter-spacing:2px;text-transform:uppercase;color:var(--orange2);display:flex;align-items:center;gap:9px}
+.eyebrow:before{content:"";width:24px;height:2px;background:var(--orange)}
+.top-chip{border:1px solid var(--line);background:rgba(255,253,248,.65);border-radius:99px;padding:7px 12px;color:var(--muted);font:10px "DM Mono";letter-spacing:.5px}
+.hero{position:relative;overflow:hidden;background:var(--plum);border-radius:25px;padding:clamp(25px,4vw,46px);color:#fff;box-shadow:var(--shadow);margin-bottom:30px;isolation:isolate}
+.hero:before{content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(215,243,106,.27);border-radius:50%;right:5%;top:-155px;box-shadow:0 0 0 28px rgba(215,243,106,.035),0 0 0 58px rgba(215,243,106,.025);z-index:-1}
+.hero:after{content:"✳";position:absolute;right:11%;bottom:-46px;font-size:180px;line-height:1;color:var(--acid);opacity:.95;transform:rotate(-18deg);z-index:-1}
+.hero h2{font:600 clamp(31px,4.2vw,54px)/1.05 "Space Grotesk";letter-spacing:-2px;margin:13px 0 13px;max-width:680px}
+.hero h2 em{font-style:normal;color:var(--acid)}
+.hero p{max-width:580px;color:#dfd1da;font-size:14px;margin:0}
+.hero-kicker{font:500 10px "DM Mono";letter-spacing:2px;text-transform:uppercase;color:var(--acid)}
+.hero-foot{display:flex;align-items:center;gap:10px;margin-top:25px;font:10px "DM Mono";color:#cbb8c6}
+.hero-foot span{display:inline-flex;align-items:center;gap:6px}
+.hero-foot i{width:6px;height:6px;border-radius:50%;background:var(--acid);display:inline-block}
+h2{font:600 22px "Space Grotesk";letter-spacing:-.5px;margin:0 0 9px}
+.sub{color:var(--muted);margin:0 0 20px;font-size:13px;max-width:680px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:14px}
+.section-head .sub{margin:0}
+.form-card,.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 5px 20px rgba(57,39,31,.025)}
+.form-card{padding:23px}
+.field-label{display:block;font:500 10px "DM Mono";letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:0 0 9px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input{flex:1;min-width:220px;padding:14px 16px;border:1px solid var(--line2);border-radius:11px;font:13px "DM Sans";background:#fffefa;color:var(--ink);transition:.2s}
+input::placeholder{color:#aaa096}
+input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 4px rgba(240,120,75,.13)}
+.btn{padding:12px 17px;border:0;border-radius:11px;background:var(--orange);color:#2e201c;font:700 12px "DM Sans";cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;white-space:nowrap}
+.btn:hover{background:var(--orange2);color:#fff;transform:translateY(-2px);box-shadow:0 7px 16px rgba(224,94,57,.2)}
+.btn.alt{background:var(--surface2);color:var(--plum);border:1px solid var(--line)}
+.btn.alt:hover{background:var(--plum);color:white;border-color:var(--plum)}
+.btn:disabled{opacity:.55;cursor:wait;transform:none;box-shadow:none}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.tabs{display:flex;gap:5px;border-bottom:1px solid var(--line);margin:22px 0 16px;padding-bottom:9px;flex-wrap:wrap}
+.tabs button{background:transparent;border:0;border-radius:9px;padding:9px 14px;font:600 12px "DM Sans";cursor:pointer;color:var(--muted);transition:.2s}
+.tabs button:hover{background:var(--paper2);color:var(--ink)}
+.tabs button.on{color:var(--plum);background:var(--acid);font-weight:700}
+.list{border:1px solid var(--line);border-radius:13px;background:#fffefa;max-height:310px;overflow:auto;margin-top:12px}
+.pick{display:grid;grid-template-columns:76px minmax(120px,1fr) auto;gap:13px;width:100%;padding:13px 15px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;font:inherit;cursor:pointer;align-items:center;transition:.15s}
+.pick:last-child{border-bottom:0}.pick:hover{background:#f4f0e6}
+.pick code{color:var(--orange2);font-weight:600}.pick small{color:var(--muted);font-size:11px}.pick span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.msg{padding:13px 16px;border-radius:12px;margin:14px 0;font-size:13px}
+.err{background:#fbe8e3;color:#9e3529;border:1px solid #f0c4b8}.info{color:var(--muted);background:var(--surface2);border:1px solid var(--line)}
+.empty{text-align:center;color:var(--muted);padding:36px 14px;font-size:13px}
+.steps{display:grid;gap:10px;margin:18px 0}.steps div{color:#a59a8f;font-size:13px;padding:9px 12px;border-radius:9px;background:var(--surface2)}.steps .done{color:var(--green);background:#eef3e9}.steps .now{color:var(--plum);font-weight:700;background:#f0edda}
+.verdict{background:var(--plum);color:#fff;border:0;border-radius:20px;padding:27px;margin:0 0 20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.verdict:after{content:"";position:absolute;width:190px;height:190px;border:1px solid rgba(215,243,106,.2);border-radius:50%;right:-55px;top:-90px;box-shadow:0 0 0 24px rgba(215,243,106,.035),0 0 0 48px rgba(215,243,106,.025);pointer-events:none}
+.verdict h2{font:600 clamp(25px,3vw,36px) "Space Grotesk";margin:0;color:var(--acid);position:relative;z-index:1}
+.verdict p{color:#e2d5dd;font-size:13px;max-width:850px;position:relative;z-index:1}
+.verdict .ev{color:#c8b5c2}
+.gauge{display:flex;gap:5px;margin:17px 0 13px;max-width:310px}.gauge i{flex:1;height:7px;border-radius:99px;background:rgba(255,255,255,.18)}
+.gauge i.on:nth-child(1){background:#a9d47d}.gauge i.on:nth-child(2){background:#f1c46e}.gauge i.on:nth-child(3){background:#f0784b}
+.stats{display:flex;gap:12px;flex-wrap:wrap;color:#d7c8d1;margin-top:19px;position:relative;z-index:1}
+.stats div{min-width:112px;padding:11px 13px;border-radius:11px;background:rgba(255,255,255,.08);font-size:10px}
+.stats b{display:block;color:#fff;font:600 22px "Space Grotesk";margin-bottom:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.item{border-top:1px solid var(--line);padding:12px 0}.item:first-of-type{border-top:0}
+details summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+code{font:11px "DM Mono";word-break:break-all;color:var(--plum)}
+.badge{padding:4px 10px;border-radius:99px;font:500 10px "DM Mono";white-space:nowrap;color:#fff}
+.badge.High,.High{background:var(--high)}.badge.Medium,.Medium{background:var(--med)}.badge.Low,.Low{background:var(--low)}.must,.Test{background:var(--plum2)}.should{background:#9a8a7e}
+.ev{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.6}ul.plain{margin:8px 0 0;padding-left:19px;color:#514740;font-size:13px}ul.plain li{padding:4px 0}
+.cmd{display:flex;gap:10px;align-items:center;background:var(--plum);color:#f8f1e8;border-radius:12px;padding:12px 14px;margin-bottom:12px;min-width:0}
+.cmd code{flex:1;color:var(--acid);overflow-wrap:anywhere}.cmd button{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;padding:6px 11px;cursor:pointer;font:11px "DM Sans"}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{text-align:left;padding:12px 10px;border-top:1px solid var(--line);vertical-align:middle}th{font:500 10px "DM Mono";letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.map{overflow-x:auto;border:1px solid var(--line);border-radius:13px;background:#fbf8f0;padding:12px}
+.map svg{min-width:900px;width:100%;height:auto}
+svg text{font:12px "DM Sans",system-ui,sans-serif;fill:var(--ink)}svg .h{font:600 11px "DM Mono";letter-spacing:.5px;fill:var(--muted)}
+svg rect.High{fill:#f8e4de;stroke:var(--high)}svg rect.Medium{fill:#f7edd8;stroke:var(--med)}svg rect.Low{fill:#e8f0df;stroke:var(--low)}svg rect.Test{fill:#eee5ed;stroke:var(--plum2)}
+svg rect{stroke-width:1.5}svg path{fill:none;stroke:#b9aa9a;stroke-width:1.5;transition:opacity .15s}svg path.dim{opacity:.1}svg path.hot{stroke:var(--orange2);stroke-width:2.5}
+.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:12px}
+iframe{max-width:100%}
+[hidden]{display:none!important}
+#report{scroll-margin-top:25px}
+#view-d>h2:first-child,#view-h>h2:first-child{font-size:34px;letter-spacing:-1px}
+#dout iframe{box-shadow:var(--shadow);margin-top:8px}
+@media(max-width:760px){
+ body{display:block}aside{width:100%;height:auto;position:relative;padding:14px 15px;display:grid;grid-template-columns:1fr 1fr;gap:5px}
+ .brand{grid-column:1/-1;padding:0 5px 12px;margin:0 0 4px}.brand-mark{width:36px;height:36px}
+ .nav-label{display:none}aside button{padding:9px 10px;font-size:12px}.side-bottom{grid-column:1/-1;margin-top:7px}.side-note{display:none}.mode{margin-top:0;padding-top:8px}
+ main{padding:23px 15px 55px}.hero{border-radius:19px}.hero:after{right:-3%;font-size:130px;opacity:.35}
+ .topline{margin-bottom:18px}.top-chip{font-size:9px}.form-card,.card{padding:17px;border-radius:15px}
+ .pick{grid-template-columns:65px minmax(0,1fr)}.pick small{grid-column:2}
+ .stats div{flex:1}.row>.btn{flex:0 0 auto}
+}
+@media(max-width:460px){.top-chip{display:none}.hero h2{letter-spacing:-1.3px}.hero{padding:25px 21px}.hero-foot{flex-wrap:wrap}.row input{min-width:100%}.row .btn{width:100%}.tabs{gap:3px}.tabs button{padding:8px 10px}.verdict{padding:21px}}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand"><div class="brand-mark">✳</div><div class="brand-name">Change Atlas<small>AI impact intelligence</small></div></div>
+  <div class="nav-label">Workspace</div>
+  <button id="nav-a" class="on"><span class="nav-icon">⌁</span> Analyze change</button>
+  <button id="nav-d"><span class="nav-icon">▤</span> Documentation</button>
+  <button id="nav-h"><span class="nav-icon">◷</span> Analysis history</button>
+  <div class="side-bottom">
+    <div class="side-note"><strong>BUILT FOR WHAT'S NEXT</strong>Understand the ripple effect of every code change before it reaches production.</div>
+    <div class="mode" id="mode"></div>
+  </div>
+</aside>
+<main>
+  <div class="topline"><div class="eyebrow">Developer intelligence / Workspace</div><div class="top-chip">✳ &nbsp; SEE THE CHANGE. TRACE THE IMPACT.</div></div>
+  <section id="view-a">
+    <div class="hero">
+      <div class="hero-kicker">✳ &nbsp; Change intelligence, made clear</div>
+      <h2>Every code change<br>has a <em>ripple effect.</em></h2>
+      <p>Trace dependencies, uncover hidden risks, and understand what a commit could change — before it changes everything.</p>
+      <div class="hero-foot"><span><i></i> Static analysis</span><span>✳ AI-assisted reasoning</span><span>↗ Impact mapping</span></div>
+    </div>
+    <div class="section-head"><div><h2>Start with a repository</h2><p class="sub">Connect a public GitHub repository, then choose the commit or pull request to inspect.</p></div></div>
+    <div class="form-card">
+      <label class="field-label" for="repo">GitHub repository / commit URL</label>
+      <div class="row"><input id="repo" placeholder="github.com/owner/repository" aria-label="GitHub repository"><button class="btn" id="load">Explore repository&nbsp; ↗</button></div>
+      <div id="picker" hidden>
+        <div class="tabs" role="tablist"><button class="on" data-k="commits">Commits</button><button data-k="pulls">Pull requests</button></div>
+        <div id="plist" class="list"></div>
+        <div class="row" style="margin-top:15px"><input id="ref" placeholder="Or enter a commit SHA / PR number (e.g. 42)" aria-label="Commit SHA or PR number"><button class="btn alt" id="run">Analyze change&nbsp; →</button></div>
+      </div>
+    </div>
+    <div id="status"></div><div id="report"></div>
+  </section>
+  <section id="view-d" hidden>
+    <div class="hero"><div class="hero-kicker">✳ &nbsp; Project knowledge, organized</div><h2>Turn repositories<br>into <em>understanding.</em></h2><p>Generate structured, readable documentation from a GitHub codebase — from architecture to setup instructions.</p></div>
+    <h2>Generate project documentation</h2>
+    <p class="sub">Paste a GitHub repository URL to create an overview, feature map, tech stack, architecture, structure, setup guide and more.</p>
+    <div class="form-card"><label class="field-label" for="drepo">GitHub repository</label><div class="row"><input id="drepo" placeholder="github.com/owner/repository" aria-label="GitHub repository for documentation"><button class="btn" id="dgen">Generate docs&nbsp; ↗</button></div></div>
+    <div id="dstatus"></div><div id="dout"></div>
+    <h2 style="margin-top:34px">Previously generated</h2><div id="dhist"></div>
+  </section>
+  <section id="view-h" hidden>
+    <div class="hero"><div class="hero-kicker">✳ &nbsp; Your engineering trail</div><h2>Past changes.<br><em>Clear decisions.</em></h2><p>Revisit previous impact analyses, reopen findings, or download the reports you have generated.</p></div>
+    <h2>Analysis history</h2><p class="sub">Previous analyses stored locally. Open one to view or download its report.</p><div id="hist"></div>
+  </section>
+</main>
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const badge = l => el("span", "badge " + l, l);
+async function api(url, opts) {
+  let r; try { r = await fetch(url, opts); } catch { throw new Error("Cannot reach the analyzer server. Is it running?"); }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof j.detail === "string" ? j.detail : j.detail?.[0]?.msg || r.statusText);
+  return j;
+}
+const status = (t, c = "info") => { $("#status").replaceChildren(); if (t) $("#status").append(el("div", "msg " + c, t)); };
+let repo = "", kind = "commits", loaded = {};
+
+api("/api/health").then(h => $("#mode").innerHTML = "AI: <b>" + (h.ai ? "Claude" : "rule-based") + "</b><br>Webhook: <b>" + (h.webhook ? "on" : "off") + "</b>").catch(() => {});
+function nav(v) { ["a", "d", "h"].forEach(k => { $("#view-" + k).hidden = k !== v; $("#nav-" + k).classList.toggle("on", k === v); }); if (v === "h") history(); if (v === "d") docHistory(); }
+$("#nav-a").onclick = () => nav("a"); $("#nav-d").onclick = () => nav("d"); $("#nav-h").onclick = () => nav("h");
+
+$("#load").onclick = async () => {
+  repo = $("#repo").value.trim();
+  if (!repo) return status("Enter a GitHub repository URL first.", "err");
+  const m = repo.match(/\/commit\/([0-9a-f]{7,40})/i), p = repo.match(/\/pull\/(\d+)/);
+  if (m || p) return analyze(m ? { sha: m[1] } : { pr: +p[1] });
+  loaded = {}; $("#report").replaceChildren(); $("#picker").hidden = true; status("Cloning repository and reading history (first run can take a minute)…");
+  $("#load").disabled = true;
+  try { await tab("commits"); $("#picker").hidden = false; status(""); } catch (e) { status(e.message, "err"); }
+  $("#load").disabled = false;
+};
+$$(".tabs[role=tablist] button").forEach(b => b.onclick = () => tab(b.dataset.k).catch(e => status(e.message, "err")));
+async function tab(k) {
+  kind = k; $$(".tabs[role=tablist] button").forEach(b => b.classList.toggle("on", b.dataset.k === k));
+  if (!loaded[k]) loaded[k] = await api("/api/" + k + "?repo=" + encodeURIComponent(repo));
+  const box = $("#plist"); box.replaceChildren();
+  if (!loaded[k].length) return box.append(el("div", "empty", k === "pulls" ? "This repository has no pull requests." : "No commits found."));
+  loaded[k].forEach(c => {
+    const b = el("button", "pick");
+    if (k === "commits") { b.append(el("code", "", c.sha.slice(0, 7)), el("span", "", c.subject), el("small", "", c.author + " · " + c.date)); b.onclick = () => analyze({ sha: c.sha }); }
+    else { b.append(el("code", "", "#" + c.number), el("span", "", c.title), el("small", "", c.state + " · " + c.author)); b.onclick = () => analyze({ pr: c.number }); }
+    box.append(b);
+  });
+}
+$("#run").onclick = () => {
+  const v = $("#ref").value.trim().replace(/^#/, "");
+  if (/^\d+$/.test(v) && v.length < 7) return analyze({ pr: +v });
+  if (/^[0-9a-f]{7,40}$/i.test(v)) return analyze({ sha: v });
+  status("Enter a commit SHA (7-40 hex characters) or a PR number.", "err");
+};
+
+const STEPS = ["Fetching the change", "Detecting changed code", "Building dependency graph", "Mapping impact", "AI risk analysis", "Preparing report"];
+async function analyze(target) {
+  $("#report").replaceChildren(); status("");
+  const box = el("div", "card"); box.append(el("h2", "", "Analyzing…")); const st = el("div", "steps"); STEPS.forEach(s => st.append(el("div", "", "○ " + s))); box.append(st); $("#report").append(box);
+  let i = 0; const tick = setInterval(() => { [...st.children].forEach((d, j) => { d.className = j < i ? "done" : j === i ? "now" : ""; d.textContent = (j < i ? "✓ " : j === i ? "● " : "○ ") + STEPS[j]; }); i = Math.min(i + 1, STEPS.length - 1); }, 1800);
+  try {
+    const r = await api("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ repo, ...target }) });
+    clearInterval(tick); render(r, $("#report")); $("#report").scrollIntoView({ behavior: "smooth" });
+  } catch (e) { clearInterval(tick); $("#report").replaceChildren(); status(e.message, "err"); }
+}
+
+function map(r) {
+  const NS = "http://www.w3.org/2000/svg", mk = (t, a = {}) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  const cols = [["Changed", 0], ["Dependent (direct)", 1], ["Potentially affected", 2], ["Tests", 3]], W = 215, X = [8, 262, 516, 770], MAXR = 14;
+  const by = cols.map(([, l]) => r.graph.nodes.filter(n => n.layer === l)), pos = {}, rows = Math.min(MAXR, Math.max(1, ...by.map(a => a.length)));
+  const svg = mk("svg", { viewBox: `0 0 1000 ${rows * 36 + 50}`, role: "img", "aria-label": "Impact map" }), edges = mk("g"), nodes = mk("g"); svg.append(edges, nodes);
+  cols.forEach(([t], c) => {
+    svg.append(Object.assign(mk("text", { x: X[c], y: 16, class: "h" }), { textContent: t }));
+    by[c].slice(0, MAXR).forEach((n, k) => {
+      const y = 30 + k * 36, g = mk("g"), name = n.id.split("/").slice(-2).join("/"); pos[n.id] = { x: X[c], y };
+      g.append(mk("rect", { x: X[c], y, width: W, height: 28, rx: 5, class: n.level }), Object.assign(mk("text", { x: X[c] + 10, y: y + 18 }), { textContent: name.length > 30 ? "…" + name.slice(-29) : name }), Object.assign(mk("title"), { textContent: n.id + " (" + n.level + ")" }));
+      g.dataset.id = n.id; nodes.append(g);
+    });
+    if (by[c].length > MAXR) svg.append(Object.assign(mk("text", { x: X[c], y: 30 + MAXR * 36 + 8, class: "h" }), { textContent: "+" + (by[c].length - MAXR) + " more" }));
+  });
+  const paths = r.graph.edges.filter(e => pos[e.s] && pos[e.t]).map(e => {
+    const a = pos[e.s], b = pos[e.t], x1 = a.x + W, y1 = a.y + 14, x2 = b.x, y2 = b.y + 14, m = (x1 + x2) / 2;
+    const p = mk("path", { d: `M${x1} ${y1}C${m} ${y1} ${m} ${y2} ${x2} ${y2}` }); p.e = e; edges.append(p); return p;
+  });
+  [...nodes.children].forEach(g => { g.onmouseenter = () => paths.forEach(p => p.classList.add(p.e.s === g.dataset.id || p.e.t === g.dataset.id ? "hot" : "dim")); g.onmouseleave = () => paths.forEach(p => p.classList.remove("hot", "dim")); });
+  const w = el("div", "map"); w.append(svg); return w;
+}
+
+function render(r, out) {
+  out.replaceChildren();
+  const lv = r.risk.level, c = r.commit, ref = c.pr ? "PR #" + c.pr : c.sha.slice(0, 7);
+  const head = el("div", "row"); head.style.margin = "8px 0 14px";
+  const t = el("div"); t.style.flex = 1; t.append(el("b", "", r.repo + " · " + ref), el("div", "ev", c.message.split("\n")[0] + " — " + c.author + ", " + c.date)); head.append(t);
+  const link = (label, q, cls, extra) => { const a = el("a", "btn " + cls, label); a.href = `/api/history/${r.id}/report?${q}`; if (extra) a.target = "_blank"; return a; };
+  const dl = link("Download report", "format=html&download=true", ""), md = link("Markdown", "format=md&download=true", "alt"), pr = link("Print / PDF view", "format=html", "alt", 1);
+  head.append(dl, md, pr); out.append(head);
+
+  const v = el("section", "verdict " + lv), g = el("div", "gauge"); ["Low", "Medium", "High"].forEach((n, i) => g.append(el("i", i <= ["Low", "Medium", "High"].indexOf(lv) ? "on" : "")));
+  const stats = el("div", "stats"); [[r.changed.length, "files changed"], [r.affected.length, "components affected"], [r.apis.length, "APIs touched"], [r.tests.length, "tests suggested"], [r.stats.edges, "dependency links scanned"]]
+    .forEach(([n, x]) => { const d = el("div"); d.append(el("b", "", n), " " + x); stats.append(d); });
+  v.append(el("h2", "", lv + " impact risk (" + r.risk.score + "/100)"), g, el("p", "", r.ai.summary), stats);
+  v.append(el("p", "ev", r.ai.source === "claude" ? "Explanations written by Claude from static analysis facts." : "Rule-based explanations. Set ANTHROPIC_API_KEY for AI-written analysis." + (r.ai.ai_error ? " (AI call failed: " + r.ai.ai_error + ")" : "")));
+  out.append(v);
+
+  const panes = {}, bar = el("div", "tabs"), body = el("div");
+  const add = (k, label, node) => { const b = el("button", "", label); b.onclick = () => { $$(".tabs:not([role]) button").forEach(x => x.classList.remove("on")); b.classList.add("on"); body.replaceChildren(node); }; bar.append(b); if (!body.children.length) { b.classList.add("on"); body.append(node); } };
+  const card = (title, ...kids) => { const d = el("div", "card"); if (title) d.append(el("h2", "", title)); d.append(...kids); return d; };
+  const ul = a => { const u = el("ul", "plain"); a.forEach(x => u.append(el("li", "", x))); return u; };
+
+  const ov = el("div", "grid"), rf = card("Risk factors");
+  if (!r.factors.length) rf.append(el("p", "ev", "No notable risk factors detected."));
+  r.factors.forEach(f => { const i = el("div", "item row"); i.append(badge(f.severity), el("span", "", f.text)); rf.append(i); });
+  ov.append(rf, el("div", "", null));
+  const side = ov.lastChild; side.append(card("Possible consequences", r.ai.consequences?.length ? ul(r.ai.consequences) : el("p", "ev", "None identified.")), card("Recommendations", ul(r.ai.recommendations || [])));
+  if (r.ai.watch_out?.length) side.append(card("Watch out for", ul(r.ai.watch_out)));
+  add("ov", "Overview", ov);
+
+  add("map", "Impact map", card("Changed → Dependent → Potentially affected", r.graph.nodes.length > r.changed.length ? map(r) : el("div", "empty", "No other files depend on the changed code, so there is nothing to map."),
+    Object.assign(el("div", "legend"), { innerHTML: "<span>Hover a node to trace its links.</span><span>Border colour = impact level</span>" })));
+
+  const cp = card("Affected components"); if (!r.affected.length) cp.append(el("div", "empty", "No other Python files import the changed code within 3 hops."));
+  r.affected.forEach(a => {
+    const d = el("details", "item"), s = el("summary"); s.append(badge(a.level), el("code", "", a.path), el("span", "ev", a.distance === 1 ? "direct" : "indirect · " + a.distance + " hops")); d.append(s, el("p", "", r.ai.components[a.path] || ""), el("p", "ev", "Path: " + a.chain.join(" → ")));
+    if (a.uses.length) d.append(el("p", "ev", "References: " + a.uses.join("; "))); cp.append(d);
+  });
+  if (r.apis.length) { const tb = el("table"); r.apis.forEach(a => { const tr = el("tr"); [badge(a.status === "changed" ? "High" : "Medium"), el("code", "", a.route), el("code", "", a.file + "::" + a.handler)].forEach(x => { const td = el("td"); td.append(x); tr.append(td); }); tb.append(tr); }); cp.append(el("h2", "", "API endpoints"), tb); }
+  add("cp", "Components & APIs", cp);
+
+  const ts = card("Recommended tests"), cmd = el("div", "cmd"), cb = el("button", "", "Copy"); cb.onclick = () => navigator.clipboard.writeText(r.command).then(() => cb.textContent = "Copied");
+  cmd.append(el("code", "", r.command), cb); ts.append(cmd); if (!r.tests.length) ts.append(el("div", "empty", "No tests reference the changed code. Consider adding one."));
+  r.tests.forEach(x => { const i = el("div", "item"), h = el("div", "row"); h.append(badge(x.priority), el("code", "", x.path)); i.append(h, el("p", "ev", x.reasons.join(" · "))); ts.append(i); });
+  add("ts", "Tests", ts);
+
+  const fl = card("Changed files");
+  r.changed.forEach(f => { const i = el("div", "item"), h = el("div", "row"); h.append(badge(f.level), el("code", "", f.path)); const b = [{ A: "added", D: "deleted", R: "renamed" }[f.status] || "modified", "+" + f.adds + " −" + f.dels]; if (f.fan_in) b.push("imported by " + f.fan_in); if (f.symbols.length) b.push("touches " + f.symbols.join(", ")); i.append(h, el("p", "ev", b.join(" · "))); if (f.note) i.append(el("p", "ev", f.note)); fl.append(i); });
+  add("fl", "Changed files", fl);
+  out.append(bar, body);
+}
+
+const dstatus = (t, c = "info") => { $("#dstatus").replaceChildren(); if (t) $("#dstatus").append(el("div", "msg " + c, t)); };
+function showDoc(d) {
+  const out = $("#dout"); out.replaceChildren();
+  const head = el("div", "row"); head.style.margin = "14px 0";
+  const t = el("div"); t.style.flex = 1; t.append(el("b", "", d.repo), el("div", "ev", d.ai.source === "claude" ? "Written by Claude from repository contents." : "Rule-based draft. Set ANTHROPIC_API_KEY for richer, AI-written documentation." + (d.ai.ai_error ? " (AI call failed: " + d.ai.ai_error + ")" : ""))); head.append(t);
+  const lk = (label, q, cls, blank) => { const a = el("a", "btn " + cls, label); a.href = `/api/docs/${d.id}/file?${q}`; if (blank) a.target = "_blank"; return a; };
+  head.append(lk("Download Markdown", "format=md&download=true", ""), lk("Download HTML", "format=html&download=true", "alt"), lk("Open / Print", "format=html", "alt", 1));
+  const fr = el("iframe"); fr.src = `/api/docs/${d.id}/file?format=html`; fr.title = "Generated documentation"; fr.setAttribute("sandbox", "allow-popups allow-popups-to-escape-sandbox");
+  fr.style.cssText = "width:100%;height:78vh;border:1px solid var(--line);border-radius:6px;background:#fff";
+  out.append(head, fr);
+}
+$("#dgen").onclick = async () => {
+  const repo = $("#drepo").value.trim();
+  if (!repo) return dstatus("Enter a GitHub repository URL first.", "err");
+  $("#dout").replaceChildren(); dstatus("Cloning the repository and writing documentation (can take up to a minute)…"); $("#dgen").disabled = true;
+  try { const d = await api("/api/docs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ repo }) }); dstatus(""); showDoc(d); docHistory(); }
+  catch (e) { dstatus(e.message, "err"); }
+  $("#dgen").disabled = false;
+};
+async function docHistory() {
+  const box = $("#dhist");
+  try {
+    const h = await api("/api/docs"); box.replaceChildren();
+    if (!h.length) return box.append(el("div", "card empty", "No documentation generated yet."));
+    const tb = el("table"), c = el("div", "card"); c.append(tb); box.append(c);
+    h.forEach(x => {
+      const tr = el("tr"), cell = (...k) => { const td = el("td"); td.append(...k); tr.append(td); return td; };
+      cell(el("b", "", x.repo), el("div", "ev", x.source === "claude" ? "AI-written" : "rule-based")); cell(el("span", "ev", new Date(x.created * 1000).toLocaleString()));
+      const o = el("button", "btn alt", "Open"), d = el("button", "btn alt", "Delete");
+      o.onclick = async () => { try { const r = await api("/api/docs/" + x.id); $("#drepo").value = r.repo; dstatus(""); showDoc(r); window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { dstatus(e.message, "err"); } };
+      d.onclick = async () => { if (confirm("Delete this documentation?")) { await api("/api/docs/" + x.id, { method: "DELETE" }); docHistory(); } };
+      cell(o, " ", d); tb.append(tr);
+    });
+  } catch (e) { box.replaceChildren(el("div", "msg err", e.message)); }
+}
+
+async function history() {
+  const box = $("#hist"); box.replaceChildren(el("p", "ev", "Loading…"));
+  try {
+    const h = await api("/api/history"); box.replaceChildren();
+    if (!h.length) return box.append(el("div", "card empty", "No analyses yet. Run one from the Analyze page and it will appear here."));
+    const tb = el("table"), c = el("div", "card"); c.append(tb); box.append(c);
+    h.forEach(x => {
+      const tr = el("tr"), cell = (...k) => { const td = el("td"); td.append(...k); tr.append(td); return td; };
+      cell(badge(x.risk)); cell(el("b", "", x.repo), el("div", "ev", (x.pr ? "PR #" + x.pr : x.sha.slice(0, 7)) + " · " + x.title));
+      cell(el("span", "ev", new Date(x.created * 1000).toLocaleString() + (x.source === "webhook" ? " · webhook" : "")));
+      const o = el("button", "btn alt", "Open"), d = el("button", "btn alt", "Delete");
+      o.onclick = async () => { try { const r = await api("/api/history/" + x.id); repo = r.repo; nav("a"); $("#picker").hidden = true; status(""); render(r, $("#report")); } catch (e) { alert(e.message); } };
+      d.onclick = async () => { if (confirm("Delete this analysis?")) { await api("/api/history/" + x.id, { method: "DELETE" }); history(); } };
+      cell(o, " ", d); tb.append(tr);
+    });
+  } catch (e) { box.replaceChildren(el("div", "msg err", e.message)); }
+}
+</script>
+</body>
+</html>
